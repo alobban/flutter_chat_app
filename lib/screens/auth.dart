@@ -31,7 +31,7 @@ class _AuthScreenState extends State<AuthScreen> {
   void _submit() async {
     final isValid = _form.currentState!.validate();
 
-    if (!isValid || _isLogin && _selectedImage == null) {
+    if (!isValid || !_isLogin && _selectedImage == null) {
       // show error message ...
       return;
     }
