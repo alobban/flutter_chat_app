@@ -9,12 +9,16 @@ exports.myFunction = functions.firestore
   .onCreate((snapshot, context) => {
     // Return this function's promise, so this ensures the firebase function
     // will keep running, until the notification is scheduled.
-    return admin.messaging().sendToTopic('chat', {
+    return admin.messaging().send({
       // Sending a notification message.
       notification: {
         title: snapshot.data()['username'],
         body: snapshot.data()['text'],
-        clickAction: 'FLUTTER_NOTIFICATION_CLICK',
       },
+      data: {
+        // Data payload to be sent to the device.
+        click_action: 'FLUTTER_NOTIFICATION_CLICK',
+      },
+      topic: 'chat',
     });
   });
